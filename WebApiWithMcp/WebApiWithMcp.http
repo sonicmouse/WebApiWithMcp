@@ -1,0 +1,6 @@
+@WebApiWithMcp_HostAddress = http://localhost:5023
+
+GET {{WebApiWithMcp_HostAddress}}/weatherforecast/?zipCode=53150
+Accept: application/json
+
+###
