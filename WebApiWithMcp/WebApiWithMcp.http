@@ -1,11 +1,19 @@
-@WebApiWithMcp_HostAddress = https://localhost:7055
+@WebApiWithMcp_HostAddress = https://localhost:7058
 
 GET {{WebApiWithMcp_HostAddress}}/weatherforecast/?zipCode=53150
 Accept: application/json
 
 ###
 
-GET {{WebApiWithMcp_HostAddress}}/mcp
-Accept: application/json
+POST {{WebApiWithMcp_HostAddress}}/mcp
+Accept: application/json, text/event-stream
+Content-Type: application/json
+x-api-key: 123456
+
+{
+	"jsonrpc": "2.0",
+	"method": "tools/list",
+	"id": 1
+}
 
 ###

@@ -1,9 +1,16 @@
+using Microsoft.AspNetCore.Authentication;
+using WebApiWithMcp.Authentication;
 using WebApiWithMcp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddTransient<IWeatherService, WeatherService>();
+
+builder.Services.AddAuthentication("ApiKey")
+	.AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>("ApiKey", null);
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddMcpServer()
 	.WithHttpTransport()
@@ -12,9 +19,11 @@ builder.Services.AddMcpServer()
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapMcp("/mcp");
+app.MapMcp("/mcp").RequireAuthorization();
 
 app.MapControllers();
 app.Run();
