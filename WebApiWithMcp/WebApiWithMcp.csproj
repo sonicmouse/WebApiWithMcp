@@ -6,4 +6,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.6.0-preview.1" />
+	</ItemGroup>
+
 </Project>

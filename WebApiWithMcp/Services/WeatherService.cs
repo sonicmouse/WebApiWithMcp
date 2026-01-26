@@ -1,4 +1,6 @@
-﻿using WebApiWithMcp.Models;
+﻿using ModelContextProtocol.Server;
+using System.ComponentModel;
+using WebApiWithMcp.Models;
 
 namespace WebApiWithMcp.Services
 {
