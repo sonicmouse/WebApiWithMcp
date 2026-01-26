@@ -18,7 +18,7 @@ namespace WebApiWithMcp.Services
 		];
 
 		[McpServerTool(Name = "get_weather_forecast")]
-		[Description("Retrieves the weather forecast for a specific location.")]
+		[Description("Retrieves the weather forecast for a specific zipcode.")]
 		public IReadOnlyList<WeatherForecast> GetForecastAsync(string zipCode)
 		{
 			return [.. Enumerable.Range(1, 5).Select(index => new WeatherForecast
