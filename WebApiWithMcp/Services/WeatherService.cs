@@ -9,6 +9,7 @@ namespace WebApiWithMcp.Services
 		IReadOnlyList<WeatherForecast> GetForecastAsync(string zipCode);
 	}
 
+	[McpServerToolType]
 	internal sealed class WeatherService : IWeatherService
 	{
 		private static readonly string[] _summaries =
@@ -16,6 +17,8 @@ namespace WebApiWithMcp.Services
 			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 		];
 
+		[McpServerTool(Name = "get_weather_forecast")]
+		[Description("Retrieves the weather forecast for a specific location.")]
 		public IReadOnlyList<WeatherForecast> GetForecastAsync(string zipCode)
 		{
 			return [.. Enumerable.Range(1, 5).Select(index => new WeatherForecast
