@@ -12,10 +12,8 @@ namespace WebApiWithMcp.Infrastructure
 		public ApiKeyAuthenticationHandler(
 			IOptionsMonitor<AuthenticationSchemeOptions> options,
 			ILoggerFactory logger,
-			UrlEncoder encoder) 
-			: base(options, logger, encoder)
-		{
-		}
+			UrlEncoder encoder)
+			: base(options, logger, encoder) { }
 
 		protected override Task<AuthenticateResult> HandleAuthenticateAsync()
 		{

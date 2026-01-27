@@ -8,28 +8,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddTransient<IWeatherService, WeatherService>();
 
-// NEW (Optional): Add API key authentication scheme
-builder.Services.AddAuthentication("ApiKey")
-	.AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>("ApiKey", null);
-
-builder.Services.AddAuthorization();
-
 // NEW: Add MCP server with HTTP transport and tools from the current assembly
 builder.Services.AddMcpServer()
 	.WithHttpTransport()
-	.WithToolsFromAssembly(typeof(Program).Assembly);
+	.WithToolsFromAssembly();
+
+// NEW (Optional): Add API key authentication scheme
+const string ApiKeyScheme = "ApiKey";
+builder.Services.AddAuthentication(ApiKeyScheme)
+	.AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(ApiKeyScheme, null);
+builder.Services.AddAuthorization();
 
 // ----------------------------------------------------------
 var app = builder.Build();
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-// NEW: Map MCP endpoint at /mcp. Optionally require API key authentication
+// NEW: Map MCP endpoint at /mcp. Optionally require authorization/authentication
 app.MapMcp("/mcp")
-	.RequireAuthorization(new AuthorizeAttribute { AuthenticationSchemes = "ApiKey" });
+	.RequireAuthorization(new AuthorizeAttribute { AuthenticationSchemes = ApiKeyScheme });
 
 app.MapControllers();
 await app.RunAsync();

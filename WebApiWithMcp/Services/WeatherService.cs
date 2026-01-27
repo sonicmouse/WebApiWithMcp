@@ -19,7 +19,8 @@ namespace WebApiWithMcp.Services
 
 		[McpServerTool(Title = "Weather Forecast by Zip Code", Name = "get_weather_forecast", ReadOnly = true)]
 		[Description("Retrieves the weather forecast for a specific zipcode.")]
-		public IReadOnlyList<WeatherForecast> GetForecastByZipCode(string zipCode)
+		public IReadOnlyList<WeatherForecast> GetForecastByZipCode(
+			[Description("The 5-digit US postal zip code for the location")] string zipCode)
 		{
 			return [.. Enumerable.Range(1, 5).Select(index => new WeatherForecast
 			{
