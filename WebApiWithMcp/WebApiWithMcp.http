@@ -1,4 +1,5 @@
 @WebApiWithMcp_HostAddress = https://localhost:7061
+@WebApiWithMcp_ApiKey = 123456
 
 // **
 // Test the WeatherForecast endpoint with a zip code parameter
@@ -9,16 +10,54 @@ Accept: application/json
 ###
 
 // **
+// Test the MCP initialize method
+// **
+POST {{WebApiWithMcp_HostAddress}}/mcp
+Accept: application/json, text/event-stream
+Content-Type: application/json
+x-api-key: {{WebApiWithMcp_ApiKey}}
+
+{
+	"jsonrpc": "2.0",
+	"method": "initialize",
+	"id": 1
+}
+
+###
+
+// **
 // Test the MCP tools/list method
 // **
 POST {{WebApiWithMcp_HostAddress}}/mcp
 Accept: application/json, text/event-stream
 Content-Type: application/json
-x-api-key: 123456
+x-api-key: {{WebApiWithMcp_ApiKey}}
 
 {
 	"jsonrpc": "2.0",
 	"method": "tools/list",
+	"id": 1
+}
+
+###
+
+// **
+// Test the MCP tools/call method - Execute get_weather_forecast tool
+// **
+POST {{WebApiWithMcp_HostAddress}}/mcp
+Accept: application/json, text/event-stream
+Content-Type: application/json
+x-api-key: {{WebApiWithMcp_ApiKey}}
+
+{
+	"jsonrpc": "2.0",
+	"method": "tools/call",
+	"params": {
+		"name": "get_weather_forecast",
+		"arguments": {
+			"zipCode": "53150"
+		}
+	},
 	"id": 1
 }
 
