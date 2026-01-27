@@ -1,4 +1,4 @@
-@WebApiWithMcp_HostAddress = https://localhost:7061
+@WebApiWithMcp_HostAddress = https://localhost:7062
 @WebApiWithMcp_ApiKey = 123456
 
 // **
