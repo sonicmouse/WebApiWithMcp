@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using WebApiWithMcp.Authentication;
 using WebApiWithMcp.Services;
 
@@ -23,7 +24,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapMcp("/mcp").RequireAuthorization();
+app.MapMcp("/mcp")
+	.RequireAuthorization(new AuthorizeAttribute { AuthenticationSchemes = "ApiKey" });
 
 app.MapControllers();
-app.Run();
+await app.RunAsync();

@@ -5,17 +5,16 @@ using WebApiWithMcp.Services;
 
 namespace WebApiWithMcp.Controllers
 {
-	[ApiController]
-	[Route("[controller]")]
+	[ApiController, Route("[controller]")]
 	public sealed class WeatherForecastController(IWeatherService weatherService) : ControllerBase
 	{
 		private readonly IWeatherService _weatherService = weatherService;
 
 		[HttpGet]
 		[Description("Retrieves the weather forecast for a specific zipcode.")]
-		public IEnumerable<WeatherForecast> Get([FromQuery] string zipCode)
+		public ActionResult<IEnumerable<WeatherForecast>> GetByZipCode([FromQuery] string zipCode)
 		{
-			return _weatherService.GetForecastAsync(zipCode);
+			return Ok(_weatherService.GetForecastByZipCode(zipCode));
 		}
 	}
 }
