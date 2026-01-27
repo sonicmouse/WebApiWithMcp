@@ -4,7 +4,7 @@ namespace WebApiWithMcp.Services
 {
 	public interface IWeatherService
 	{
-		IReadOnlyList<WeatherForecast> GetForecastAsync(string zipCode);
+		IReadOnlyList<WeatherForecast> GetForecastByZipCode(string zipCode);
 	}
 
 	internal sealed class WeatherService : IWeatherService
@@ -14,7 +14,7 @@ namespace WebApiWithMcp.Services
 			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 		];
 
-		public IReadOnlyList<WeatherForecast> GetForecastAsync(string zipCode)
+		public IReadOnlyList<WeatherForecast> GetForecastByZipCode(string zipCode)
 		{
 			return [.. Enumerable.Range(1, 5).Select(index => new WeatherForecast
 			{
