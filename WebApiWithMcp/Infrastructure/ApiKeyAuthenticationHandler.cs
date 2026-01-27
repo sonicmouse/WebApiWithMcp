@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
-namespace WebApiWithMcp.Authentication
+namespace WebApiWithMcp.Infrastructure
 {
 	internal sealed class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 	{
