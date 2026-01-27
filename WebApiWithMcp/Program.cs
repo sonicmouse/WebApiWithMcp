@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddTransient<IWeatherService, WeatherService>();
 
+// ----------------------------------------------------------
 var app = builder.Build();
 
 app.UseHttpsRedirection();
