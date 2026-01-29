@@ -7,6 +7,7 @@ namespace WebApiWithMcp.Infrastructure
 {
 	internal sealed class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 	{
+		public const string SchemeName = "ApiKey";
 		private const string ApiKeyHeaderName = "X-Api-Key";
 
 		public ApiKeyAuthenticationHandler(

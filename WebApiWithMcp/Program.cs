@@ -14,9 +14,8 @@ builder.Services.AddMcpServer()
 	.WithToolsFromAssembly();
 
 // NEW (Optional): Add API key authentication scheme
-const string ApiKeyScheme = "ApiKey";
-builder.Services.AddAuthentication(ApiKeyScheme)
-	.AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(ApiKeyScheme, null);
+builder.Services.AddAuthentication(ApiKeyAuthenticationHandler.SchemeName)
+	.AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationHandler.SchemeName, null);
 builder.Services.AddAuthorization();
 
 // ----------------------------------------------------------
@@ -28,7 +27,7 @@ app.UseAuthorization();
 
 // NEW: Map MCP endpoint at /mcp. Optionally require authorization/authentication
 app.MapMcp("/mcp")
-	.RequireAuthorization(new AuthorizeAttribute { AuthenticationSchemes = ApiKeyScheme });
+	.RequireAuthorization(new AuthorizeAttribute { AuthenticationSchemes = ApiKeyAuthenticationHandler.SchemeName });
 
 app.MapControllers();
 await app.RunAsync();

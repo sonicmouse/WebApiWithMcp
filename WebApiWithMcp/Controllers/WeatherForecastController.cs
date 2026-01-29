@@ -12,7 +12,7 @@ namespace WebApiWithMcp.Controllers
 
 		[HttpGet]
 		[Description("Retrieves the weather forecast for a specific zipcode.")]
-		public ActionResult<IEnumerable<WeatherForecast>> GetByZipCode([FromQuery] string zipCode)
+		public ActionResult<IReadOnlyList<WeatherForecast>> GetByZipCode([FromQuery] string zipCode)
 		{
 			return Ok(_weatherService.GetForecastByZipCode(zipCode));
 		}
